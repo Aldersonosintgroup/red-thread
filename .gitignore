@@ -1,0 +1,37 @@
+# --- Case data & secrets: never commit ---
+backend/data_store/
+*.db
+*.sqlite
+.env
+.env.*
+app_settings.json
+
+# --- Python ---
+backend/venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+backend/build/
+backend/dist/
+
+# --- Frontend / Tauri build output ---
+node_modules/
+frontend/dist/
+frontend/src-tauri/target/
+frontend/src-tauri/gen/
+# Sidecar binaries are build artifacts (70 MB backend, 34 MB Ollama);
+# rebuild with PyInstaller rather than versioning them.
+frontend/src-tauri/binaries/*.exe
+
+# --- Build logs & ad-hoc screenshots ---
+*.log
+/*.png
+!/icon_source.png
+# Bundled Ollama runtime and model weights: large third-party artifacts,
+# fetched/copied in at build time, not source.
+frontend/src-tauri/resources/lib/
+frontend/src-tauri/resources/ollama_models/
+_moondream_backup/
+
+# Real names checked by scripts/build-release.ps1: never commit
+scripts/private-names.txt

@@ -1,0 +1,168 @@
+﻿THE RED THREAD — END USER LICENSE AGREEMENT
+Version 1.0
+
+Please read this agreement before installing. By clicking "I Agree", installing,
+or using The Red Thread ("the Software"), you accept these terms. If you do not
+accept them, do not install or use the Software.
+
+1. LICENSOR
+The Software is licensed, not sold, by Alderson OSINT Group LLC ("Licensor").
+
+2. LICENSE GRANT
+Licensor grants you a non-exclusive, non-transferable license to install and use
+the Software on computers you own or control, for your own investigative,
+research, journalistic, legal-support or personal purposes, for the period and
+number of users stated in your purchase or evaluation terms. An evaluation or
+demonstration copy may be used only to evaluate the Software.
+
+3. RESTRICTIONS
+You may not: (a) sell, rent, lease, sublicense or redistribute the Software;
+(b) reverse engineer, decompile or disassemble it, except where the law
+expressly allows this despite this restriction; (c) remove or alter any
+copyright, license or attribution notice; (d) use the Software to harass,
+stalk, or unlawfully surveil any person, or in violation of any law.
+
+4. YOUR DATA
+Case files, documents, notes and settings you create stay on your computer.
+Licensor does not receive, collect or have access to them. You are solely
+responsible for having the right to process the documents and personal data you
+load into the Software, for keeping backups, and for securing your computer and
+any encryption passphrase or recovery key. A lost passphrase and recovery key
+cannot be recovered by Licensor.
+
+5. THIRD-PARTY AI SERVICES
+The Software can send document images and case text to an AI service you select
+(for example Anthropic Claude, xAI Grok, OpenAI, Google Gemini, or another
+provider you configure), using your own account and API key. That transfer
+happens only when you select such a provider. Your use of those services is
+governed by their own terms and privacy policies, and their fees are your
+responsibility. Licensor is not responsible for those services. The built-in
+local engine processes documents on your computer without sending them anywhere.
+
+6. NOT LEGAL ADVICE; AI OUTPUT MAY BE WRONG
+The Software is an investigative aid. Its document readings, dates, flags,
+scores, financial summaries, network maps and AI-generated analyses and
+hypotheses may be incomplete or wrong, and are not evidence, legal advice, or a
+finding that any person committed wrongdoing. You must verify every result
+against the original documents and obtain qualified legal advice before relying
+on it. References to laws are general information and may be out of date.
+
+7. OWNERSHIP
+Licensor and its licensors own all rights in the Software. Third-party
+components included in the Software are licensed under their own terms, listed
+in THIRD_PARTY_NOTICES.txt and in the app under Settings > About & licenses.
+Nothing in this agreement limits your rights under those licenses.
+
+8. DISCLAIMER OF WARRANTIES
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE SOFTWARE IS PROVIDED "AS IS" AND "AS
+AVAILABLE", WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, ACCURACY AND
+NON-INFRINGEMENT.
+
+9. LIMITATION OF LIABILITY
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, LICENSOR WILL NOT BE LIABLE FOR ANY
+INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL OR PUNITIVE DAMAGES, OR FOR LOSS OF
+DATA, PROFITS OR GOODWILL, ARISING FROM THE SOFTWARE OR THIS AGREEMENT. LICENSOR'S
+TOTAL LIABILITY WILL NOT EXCEED THE AMOUNT YOU PAID FOR THE SOFTWARE IN THE
+TWELVE MONTHS BEFORE THE CLAIM. Some jurisdictions do not allow these
+limitations, so they may not fully apply to you.
+
+10. TERMINATION
+This license ends automatically if you breach it. On termination you must stop
+using and delete the Software. Sections 4 to 9 and 11 survive termination.
+
+11. GENERAL
+This agreement is governed by the laws of the U.S. state in which Licensor is
+organized, without regard to conflict-of-law rules. It is the entire agreement
+about the Software unless you have a separate signed agreement with Licensor,
+which then prevails. If any part is unenforceable, the rest remains in effect.
+The English version controls; the Spanish translation below is for convenience.
+
+
+=====================================================================
+
+THE RED THREAD — CONTRATO DE LICENCIA DE USUARIO FINAL
+Versión 1.0
+
+Lea este contrato antes de instalar. Al hacer clic en "Acepto", instalar o usar
+The Red Thread ("el Software"), usted acepta estos términos. Si no los acepta, no
+instale ni use el Software.
+
+1. LICENCIANTE
+El Software se licencia, no se vende, por Alderson OSINT Group LLC ("el
+Licenciante").
+
+2. CONCESIÓN DE LICENCIA
+El Licenciante le otorga una licencia no exclusiva e intransferible para
+instalar y usar el Software en equipos de su propiedad o bajo su control, para
+fines propios de investigación, periodismo, apoyo jurídico o uso personal,
+durante el plazo y para el número de usuarios indicados en su compra o
+evaluación. Una copia de evaluación o demostración solo puede usarse para
+evaluar el Software.
+
+3. RESTRICCIONES
+Usted no puede: (a) vender, arrendar, sublicenciar o redistribuir el Software;
+(b) aplicar ingeniería inversa, descompilar o desensamblar, salvo cuando la ley
+lo permita expresamente; (c) eliminar o modificar avisos de derechos de autor,
+licencia o atribución; (d) usar el Software para acosar, perseguir o vigilar
+ilegalmente a cualquier persona, o en infracción de cualquier ley.
+
+4. SUS DATOS
+Los casos, documentos, notas y configuraciones que usted cree permanecen en su
+equipo. El Licenciante no los recibe, no los recopila ni tiene acceso a ellos.
+Usted es el único responsable de tener derecho a tratar los documentos y datos
+personales que cargue, de mantener respaldos, y de proteger su equipo y su
+contraseña de cifrado o clave de recuperación. El Licenciante no puede recuperar
+una contraseña y clave de recuperación perdidas.
+
+5. SERVICIOS DE IA DE TERCEROS
+El Software puede enviar imágenes de documentos y texto del caso al servicio de
+IA que usted seleccione (por ejemplo Anthropic Claude, xAI Grok, OpenAI, Google
+Gemini u otro proveedor que configure), usando su propia cuenta y clave de API.
+Ese envío ocurre solo cuando usted selecciona dicho proveedor. El uso de esos
+servicios se rige por sus propios términos y políticas de privacidad, y sus
+cargos corren por su cuenta. El Licenciante no es responsable de esos servicios.
+El motor local incluido procesa los documentos en su equipo sin enviarlos a
+ninguna parte.
+
+6. NO ES ASESORÍA LEGAL; LOS RESULTADOS DE LA IA PUEDEN SER ERRÓNEOS
+El Software es una herramienta de apoyo a la investigación. Sus lecturas de
+documentos, fechas, alertas, puntajes, resúmenes financieros, mapas de red y
+análisis e hipótesis generados por IA pueden ser incompletos o erróneos, y no
+constituyen evidencia, asesoría legal, ni la constatación de que una persona
+haya cometido un delito. Debe verificar cada resultado con los documentos
+originales y obtener asesoría legal calificada antes de basarse en él. Las
+referencias a leyes son información general y pueden estar desactualizadas.
+
+7. PROPIEDAD
+El Licenciante y sus licenciantes son titulares de todos los derechos sobre el
+Software. Los componentes de terceros incluidos se rigen por sus propias
+licencias, indicadas en THIRD_PARTY_NOTICES.txt y en la aplicación en
+Configuración > Acerca de y licencias. Nada en este contrato limita sus derechos
+bajo esas licencias.
+
+8. EXCLUSIÓN DE GARANTÍAS
+EN LA MÁXIMA MEDIDA PERMITIDA POR LA LEY, EL SOFTWARE SE ENTREGA "TAL CUAL" Y
+"SEGÚN DISPONIBILIDAD", SIN GARANTÍAS DE NINGÚN TIPO, EXPRESAS O IMPLÍCITAS,
+INCLUIDAS LAS DE COMERCIABILIDAD, IDONEIDAD PARA UN FIN DETERMINADO, EXACTITUD
+Y NO INFRACCIÓN.
+
+9. LIMITACIÓN DE RESPONSABILIDAD
+EN LA MÁXIMA MEDIDA PERMITIDA POR LA LEY, EL LICENCIANTE NO SERÁ RESPONSABLE DE
+DAÑOS INDIRECTOS, INCIDENTALES, ESPECIALES, CONSECUENTES O PUNITIVOS, NI DE LA
+PÉRDIDA DE DATOS, GANANCIAS O REPUTACIÓN, DERIVADOS DEL SOFTWARE O DE ESTE
+CONTRATO. LA RESPONSABILIDAD TOTAL DEL LICENCIANTE NO EXCEDERÁ EL MONTO QUE
+USTED HAYA PAGADO POR EL SOFTWARE EN LOS DOCE MESES ANTERIORES AL RECLAMO.
+Algunas jurisdicciones no permiten estas limitaciones, por lo que podrían no
+aplicarse plenamente a usted.
+
+10. TÉRMINO
+Esta licencia termina automáticamente si usted la incumple. Al terminar, debe
+dejar de usar y eliminar el Software. Las secciones 4 a 9 y 11 subsisten.
+
+11. DISPOSICIONES GENERALES
+Este contrato se rige por las leyes del estado de EE. UU. en que el Licenciante
+está constituido, sin considerar sus normas de conflicto de leyes. Es el acuerdo
+completo sobre el Software, salvo que usted tenga un contrato firmado aparte con
+el Licenciante, el cual prevalecerá. Si alguna parte es inaplicable, el resto
+sigue vigente. Prevalece la versión en inglés; esta traducción es referencial.

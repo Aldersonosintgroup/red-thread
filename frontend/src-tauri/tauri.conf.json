@@ -1,0 +1,88 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+  "productName": "The Red Thread",
+  "version": "0.1.0",
+  "identifier": "llc.aldersonosint.redthread",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:5173",
+    "beforeDevCommand": "",
+    "beforeBuildCommand": ""
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "The Red Thread",
+        "width": 1360,
+        "height": 860,
+        "minWidth": 1024,
+        "minHeight": 680,
+        "resizable": true,
+        "fullscreen": false,
+        "decorations": false,
+        "visible": false,
+        "center": true
+      },
+      {
+        "label": "splashscreen",
+        "url": "splashscreen.html",
+        "title": "The Red Thread",
+        "width": 480,
+        "height": 320,
+        "resizable": false,
+        "decorations": false,
+        "transparent": true,
+        "alwaysOnTop": true,
+        "center": true,
+        "skipTaskbar": true,
+        "visible": true
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": [
+      "nsis",
+      "appimage"
+    ],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "externalBin": [
+      "binaries/redthread-backend",
+      "binaries/ollama"
+    ],
+    "resources": {
+      "resources/lib/ollama/**/*": "lib/ollama/",
+      "resources/ollama_models/manifests/registry.ollama.ai/library/qwen3-vl/2b": "resources/ollama_models/manifests/registry.ollama.ai/library/qwen3-vl/2b",
+      "resources/ollama_models/blobs/sha256-7339fa418c9ad3e8e12e74ad0fd26a9cc4be8703f9c110728a992b193be85cb2": "resources/ollama_models/blobs/sha256-7339fa418c9ad3e8e12e74ad0fd26a9cc4be8703f9c110728a992b193be85cb2",
+      "resources/ollama_models/blobs/sha256-b1b0036de383cfacd2f6f0ec14c43139d08a215e673fadaf4f3601eac4bd5490": "resources/ollama_models/blobs/sha256-b1b0036de383cfacd2f6f0ec14c43139d08a215e673fadaf4f3601eac4bd5490",
+      "resources/ollama_models/blobs/sha256-ebabfa59b71a5b96e0281ec2994977e785284e0939807a99fc340dec3c6f10de": "resources/ollama_models/blobs/sha256-ebabfa59b71a5b96e0281ec2994977e785284e0939807a99fc340dec3c6f10de",
+      "resources/ollama_models/blobs/sha256-f6417cb1e26962991f8e875a93f3cb0f92bc9b4955e004881251ccbf934a19d2": "resources/ollama_models/blobs/sha256-f6417cb1e26962991f8e875a93f3cb0f92bc9b4955e004881251ccbf934a19d2",
+      "../../legal/EULA.txt": "EULA.txt",
+      "../../legal/THIRD_PARTY_NOTICES.txt": "THIRD_PARTY_NOTICES.txt"
+    },
+    "windows": {
+      "webviewInstallMode": {
+        "type": "downloadBootstrapper"
+      },
+      "timestampUrl": "http://timestamp.digicert.com",
+      "digestAlgorithm": "sha256"
+    },
+    "android": {
+      "debugApplicationIdSuffix": ".debug"
+    },
+    "publisher": "Alderson OSINT Group LLC",
+    "copyright": "© 2026 Alderson OSINT Group LLC. All rights reserved.",
+    "shortDescription": "Case analysis for historical adoption investigations",
+    "licenseFile": "../../legal/EULA.txt"
+  }
+}

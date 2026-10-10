@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Red Thread — User Manual / Manual de Usuario</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #0a0d13; --surface: #12151d; --surface-2: #181c26; --border: #262b38;
+    --ink: #e9e7e2; --ink-soft: #c7c5c0; --ink-muted: #878b98;
+    --accent: #dc2626; --accent-ink: #fca5a5; --accent-soft: #1f1314;
+    --red: #dc2626; --orange: #ea580c; --yellow: #ca8a04; --good: #10b981; --warn: #f59e0b;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.65 'Public Sans', system-ui, sans-serif; }
+  h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; color: var(--ink); line-height: 1.2; text-wrap: balance; }
+  h1 { font-size: 40px; margin: 0 0 10px; }
+  h2 { font-size: 26px; margin: 0 0 6px; }
+  h3 { font-size: 17px; margin: 22px 0 6px; font-family: 'Public Sans', sans-serif; font-weight: 600; }
+  p, li { color: var(--ink-soft); }
+  p { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  li { margin: 4px 0; }
+  b, strong { color: var(--ink); }
+  code, .ui { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.86em; background: var(--surface-2);
+    border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; color: var(--ink); white-space: nowrap; }
+  a { color: var(--accent-ink); }
+
+  .bar { position: sticky; top: 0; z-index: 5; display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    padding: 10px 20px; background: #090b10ee; border-bottom: 1px solid var(--border); backdrop-filter: blur(6px); }
+  .brand { display: flex; align-items: center; gap: 9px; font-size: 13px; letter-spacing: .06em; color: var(--ink-muted); }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #ef4444, #7f1d1d); }
+  .lang { display: flex; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+  .lang button { background: none; border: 0; color: var(--ink-muted); padding: 6px 14px; font: 600 13px 'Public Sans', sans-serif; cursor: pointer; }
+  .lang button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px 80px; }
+  header.cover { padding: 56px 0 36px; border-bottom: 1px solid var(--border); margin-bottom: 8px; }
+  .eyebrow { font: 500 12px 'IBM Plex Mono', monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-ink); }
+  .lede { font-size: 17px; color: var(--ink-muted); max-width: 62ch; }
+  .meta { margin-top: 18px; font: 12px 'IBM Plex Mono', monospace; color: var(--ink-muted); }
+
+  nav.toc { margin: 28px 0; padding: 18px 22px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; }
+  nav.toc ol { columns: 2; column-gap: 32px; margin: 6px 0 0; }
+  nav.toc li { break-inside: avoid; }
+  nav.toc a { color: var(--ink-soft); text-decoration: none; }
+  nav.toc a:hover { color: var(--ink); text-decoration: underline; }
+
+  section { padding: 34px 0 10px; border-top: 1px solid var(--border); }
+  .num { display: block; font: 500 13px 'IBM Plex Mono', monospace; color: var(--accent-ink); }
+  .dek { color: var(--ink-muted); margin-top: 0; }
+
+  .callout { display: flex; gap: 12px; padding: 14px 16px; border-radius: 8px; margin: 14px 0; border: 1px solid var(--border); background: var(--surface); }
+  .callout.warn { border-color: #78350f; background: #1c1405; }
+  .callout.key { border-color: #7f1d1d; background: var(--accent-soft); }
+  .callout .icon { font-weight: 700; color: var(--warn); }
+  .callout.key .icon { color: var(--accent-ink); }
+  .callout p { margin: 0; }
+
+  .steps { counter-reset: s; list-style: none; padding: 0; }
+  .steps > li { counter-increment: s; position: relative; padding-left: 40px; margin: 12px 0; }
+  .steps > li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 26px; height: 26px; border-radius: 50%;
+    background: var(--surface-2); border: 1px solid var(--border); color: var(--ink); font: 600 13px/26px 'Public Sans', sans-serif; text-align: center; }
+
+  .table { overflow-x: auto; margin: 12px 0; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--border); color: var(--ink-soft); }
+  th { color: var(--ink-muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .05em; }
+  .sev { font: 600 11px 'IBM Plex Mono', monospace; padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
+  .crit { background: #450a0a; color: #fca5a5; } .high { background: #431407; color: #fdba74; }
+  .med { background: #422006; color: #fde68a; } .tier { background: var(--surface-2); color: var(--ink-soft); }
+  .t-red { color: #f87171; font-weight: 700; } .t-orange { color: #fb923c; font-weight: 700; } .t-yellow { color: #facc15; font-weight: 700; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 12px 0; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+  .card h4 { margin: 0 0 4px; font-size: 14px; color: var(--ink); }
+  .card p { margin: 0; font-size: 14px; }
+
+  [data-lang] { display: none; }
+  html[data-active="en"] [data-lang="en"], html[data-active="es"] [data-lang="es"] { display: block; }
+
+  footer { text-align: center; color: var(--ink-muted); font: 12px 'IBM Plex Mono', monospace; padding: 30px 20px 50px; border-top: 1px solid var(--border); }
+
+  @media (max-width: 640px) { nav.toc ol { columns: 1; } h1 { font-size: 30px; } }
+
+  @media print {
+    :root { --bg: #fff; --surface: #f6f6f4; --surface-2: #efefec; --border: #d8d8d2; --ink: #111; --ink-soft: #2a2a2a; --ink-muted: #555; --accent-ink: #b91c1c; --accent-soft: #fdf2f2; color-scheme: light; }
+    body { font-size: 11pt; }
+    .bar { display: none; }
+    section { break-inside: auto; }
+    h2, h3, .num, .dek { break-after: avoid; }
+    section > .num { break-before: auto; }
+    .dek + *, h3 + * { break-before: avoid; }
+    table, .callout, .card { break-inside: avoid; }
+    .callout.warn { background: #fffbeb; border-color: #f59e0b; }
+    .crit { background: #fee2e2; color: #991b1b; } .high { background: #ffedd5; color: #9a3412; } .med { background: #fef3c7; color: #92400e; }
+    a { color: inherit; text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="brand"><span class="dot"></span><b>THE RED THREAD</b> · EL HILO ROJO</div>
+  <div class="lang" role="group" aria-label="Language / Idioma">
+    <button type="button" data-set="en">English</button>
+    <button type="button" data-set="es">Español</button>
+  </div>
+</div>
+
+<!-- ============================================================ ENGLISH -->
+<div data-lang="en" lang="en">
+<div class="wrap">
+  <header class="cover">
+    <div class="eyebrow">User manual · Version 0.1</div>
+    <h1>The Red Thread</h1>
+    <p class="lede">A forensic case-analysis tool for adoption investigations. It reads scanned case documents, links the people and organizations in them, builds a timeline, and flags irregularities, with an investigator reviewing every finding before it enters the case.</p>
+    <div class="meta">Alderson OSINT Group LLC</div>
+  </header>
+
+  <nav class="toc">
+    <b>Contents</b>
+    <ol>
+      <li><a href="#en-1">Before you start</a></li>
+      <li><a href="#en-2">Installing and first launch</a></li>
+      <li><a href="#en-3">Protecting your case files (encryption)</a></li>
+      <li><a href="#en-4">Creating a case</a></li>
+      <li><a href="#en-5">Adding documents</a></li>
+      <li><a href="#en-6">Reviewing and committing</a></li>
+      <li><a href="#en-7">The case workspace</a></li>
+      <li><a href="#en-8">Flags and the irregularity score</a></li>
+      <li><a href="#en-9">The watchlist</a></li>
+      <li><a href="#en-10">AI engines, privacy and cost</a></li>
+      <li><a href="#en-11">Exporting and backing up</a></li>
+      <li><a href="#en-12">Troubleshooting</a></li>
+    </ol>
+  </nav>
+
+  <section id="en-1">
+    <span class="num">01</span><h2>Before you start</h2>
+    <p class="dek">How the tool thinks about evidence.</p>
+    <p><b>The AI reads; you decide.</b> Every document is read by an AI vision engine, but nothing it finds becomes part of the case until you have checked it against the original and pressed <span class="ui">Commit to Case</span>. Treat every AI field as a draft.</p>
+    <p><b>Originals are never altered.</b> The files you upload are stored as the evidence of record. Rotating a photo is the only operation that rewrites a file, and only before it has been committed.</p>
+    <p><b>Language.</b> The tool uses careful, trauma-informed language: it reports <i>irregularities</i> and <i>anomalies</i>, never conclusions such as "trafficking". A flag is a reason to look closer, not a finding of wrongdoing.</p>
+    <p>The app's screens are in English. This manual shows button names exactly as they appear on screen, like <span class="ui">Upload Documents</span>.</p>
+  </section>
+
+  <section id="en-2">
+    <span class="num">02</span><h2>Installing and first launch</h2>
+    <ol class="steps">
+      <li>Run <b>The Red Thread_0.1.0_x64-setup.exe</b> and follow the installer. It installs for your Windows user only; no administrator rights are needed. The installer includes the local AI engine, so no internet connection is required to install or to use the local engine.</li>
+      <li>Open <b>The Red Thread</b> from the Start menu or the desktop shortcut. A splash screen appears while the database service and the local AI engine start.</li>
+      <li>The very first launch can take up to a minute while Windows security scans the newly installed programs. Later launches are faster.</li>
+    </ol>
+    <div class="callout"><span class="icon">i</span><p>The first document read by the <b>local</b> AI engine after each launch takes longer (often one to two minutes) because the model is loaded into memory. It stays loaded while you work.</p></div>
+  </section>
+
+  <section id="en-3">
+    <span class="num">03</span><h2>Protecting your case files (encryption)</h2>
+    <p class="dek">Recommended as the first thing you do on a new installation.</p>
+    <p>With encryption on, the case database, every uploaded document, and your saved AI service keys are encrypted with AES-256 on this computer. Anyone who copies the files without your passphrase sees only scrambled data. The app opens on a lock screen and locks itself when you step away.</p>
+
+    <h3>Turning encryption on</h3>
+    <ol class="steps">
+      <li>Open <span class="ui">Settings</span> in the sidebar and scroll to <b>Security</b>.</li>
+      <li>Choose a passphrase of at least 10 characters, type it twice, and press <span class="ui">Turn on encryption</span>. A long phrase of several unrelated words is both strong and memorable.</li>
+      <li>The app encrypts all existing data. This usually takes seconds; very large cases can take a minute. Any unencrypted backup copies the app itself had kept are securely deleted.</li>
+      <li>A <b>recovery key</b> is displayed, in the form <code>ABCD-EFGH-…</code> (eight groups of four characters). Store it somewhere other than this computer: a password manager, or written on paper and kept somewhere safe.</li>
+      <li>Tick <b>I have stored this recovery key somewhere safe</b> and press <span class="ui">Done</span>. The key is never shown again.</li>
+    </ol>
+    <div class="callout key"><span class="icon">!</span><p><b>There is no back door.</b> If both the passphrase and the recovery key are lost, the case files cannot be recovered by anyone, including the developers. This is what makes the encryption trustworthy.</p></div>
+
+    <h3>Locking and unlocking</h3>
+    <ul>
+      <li><b>Lock now:</b> press <span class="ui">Lock</span> at the bottom of the sidebar, or <span class="ui">Lock now</span> in Settings → Security.</li>
+      <li><b>Automatic lock:</b> after a period without activity (15 minutes by default). Change it in Settings → Security: 5, 15, 30 or 60 minutes, or Never. The app never locks while documents are still being read; it locks once the queue is finished.</li>
+      <li><b>Unlock:</b> type the passphrase on the lock screen. After several wrong attempts the app slows down further attempts.</li>
+    </ul>
+
+    <h3>Forgotten passphrase</h3>
+    <p>On the lock screen choose <span class="ui">Forgot the passphrase? Use your recovery key</span>, enter the recovery key (dashes and capital letters are optional), and choose a new passphrase. The recovery key keeps working afterwards.</p>
+
+    <h3>Changing the passphrase</h3>
+    <p>Settings → Security → <b>Change passphrase</b>: enter the current passphrase and the new one twice. Nothing is re-encrypted, so this is instant. Your recovery key does not change.</p>
+    <div class="callout"><span class="icon">i</span><p>For complete protection, also turn on Windows <b>BitLocker</b> (full-disk encryption) and use a Windows account password. Those protect everything else on the computer too, including temporary files outside the app's control.</p></div>
+  </section>
+
+  <section id="en-4">
+    <span class="num">04</span><h2>Creating a case</h2>
+    <p>Every case is built around one <b>subject</b>: the person whose adoption is being investigated. The subject is the fixed centre of the case's network map.</p>
+    <ol class="steps">
+      <li>Press <span class="ui">+ New Case</span> in the sidebar.</li>
+      <li>Fill in the <b>case number</b> (your own reference), a <b>case title</b>, and the subject's <b>full name</b>. These three are required.</li>
+      <li>Optionally add <b>aliases</b> (comma-separated: other names the subject has been known by, such as the name given after adoption), <b>date of birth</b>, <b>place of birth</b>, and <b>notes</b>.</li>
+      <li>Press <span class="ui">Create Case</span>. The case opens on its Documents tab.</li>
+    </ol>
+    <h3>The sample case</h3>
+    <p>To learn the tool or demonstrate it, press <span class="ui">Load sample case</span> on the New Case page. It creates <b>Sample Case (fictional)</b>: invented people, organizations, documents and dates, arranged so that every type of flag appears. It also adds three fictional watchlist entries marked "fictional sample". Delete them from the Investigated Entities page when you no longer need them.</p>
+  </section>
+
+  <section id="en-5">
+    <span class="num">05</span><h2>Adding documents</h2>
+    <h3>Uploading scans and photos</h3>
+    <ol class="steps">
+      <li>In the case's <b>Documents</b> tab, press <span class="ui">Upload Documents</span> and select one or more files. Accepted formats: <b>JPG, PNG and PDF</b>.</li>
+      <li>Each file appears in the list with a status badge: <b>pending</b> (waiting in the queue), <b>processing</b> (being read), <b>extracted</b> (ready for your review), <b>reviewed</b> (committed), or <b>error</b>.</li>
+      <li>Documents are read one at a time, a few seconds apart, so a large batch never overloads the AI engine. You can keep working while they are processed.</li>
+    </ol>
+    <p><b>Multi-page PDFs</b> are read one page at a time. Up to 40 pages per file are read automatically; if a file is longer, a message tells you which pages to enter by hand.</p>
+    <p><b>Phone photos</b> are reduced in size in memory before being sent to the AI. The stored original keeps its full resolution.</p>
+
+    <h3>Manual entries</h3>
+    <p>For information with no scanned document (a phone call, a public record, something a witness said), press <span class="ui">+ Manual Entry</span>, give it a label, and fill in the same review form by hand.</p>
+
+    <h3>Duplicate photos</h3>
+    <p>When the same page has been photographed twice, a <b>Possible duplicate photos</b> panel appears above the document list. Press <span class="ui">Compare…</span> (or click the two thumbnails) to see both copies side by side, with linked <span class="ui">Fit</span> / <span class="ui">50%</span> / <span class="ui">100%</span> zoom and what was read from each. Then choose <span class="ui">Keep left · delete right</span>, <span class="ui">Keep right · delete left</span>, or <span class="ui">Not duplicates: keep both</span>. Deleting always asks a second time and warns you if that copy has already been reviewed. "Not duplicates" is remembered. Pixel-identical re-uploads can be removed all at once with <span class="ui">Clean up … exact duplicate(s)</span>, which keeps the earliest upload of each.</p>
+
+    <h3>Sideways photos</h3>
+    <p>Select the document and press <span class="ui">⟳ Rotate</span> above the image; the AI then reads it again in the new orientation. Rotation is available for images (not PDFs) and only before the document is committed.</p>
+  </section>
+
+  <section id="en-6">
+    <span class="num">06</span><h2>Reviewing and committing</h2>
+    <p class="dek">The most important step: checking the AI's reading against the original.</p>
+    <p>Select a document. The <b>viewer</b> in the middle shows the original; the <b>review panel</b> on the right shows what the AI found, as editable fields.</p>
+
+    <h3>Using the viewer</h3>
+    <ul>
+      <li>Images open fitted to the panel. Use <span class="ui">−</span> and <span class="ui">+</span> (or <b>Ctrl + mouse wheel</b>) to zoom from 5% to 400%, <span class="ui">Fit</span> to see the whole page, and <span class="ui">100%</span> for actual size. Scroll to move around a zoomed page.</li>
+      <li>PDFs open in the built-in PDF viewer.</li>
+    </ul>
+
+    <h3>The review fields</h3>
+    <ul>
+      <li><b>Document Type</b>: petition, decree, birth certificate, payment receipt, correspondence, medical record, immigration record, court record, or other.</li>
+      <li><b>Names</b>: every person and organization on the page, with their role. Correct misspellings, remove anything that is not a real person or organization, and add names the AI missed.</li>
+      <li><b>Dates</b>: each with a label (<i>birth, petition_filed, decree_issued, payment, document_date, other</i>). See below.</li>
+      <li><b>Financial Transactions</b>: amount, currency, what it was for, and any case or file number written next to it.</li>
+      <li><b>Legal References</b>: law and decree numbers, comma-separated.</li>
+      <li><b>Notes</b>: the AI's short description of the page.</li>
+    </ul>
+
+    <h3>How dates are handled</h3>
+    <p>Dates are converted to a standard form however the document writes them: <code>24/08/1983</code>, <code>24 de agosto de 1983</code>, <code>August 24, 1983</code>, or spelled out in words in notarial style. Under each date the original wording is shown as <b>As written: "…"</b>.</p>
+    <p>A date with an <b style="color:var(--warn)">amber border</b> needs your attention. The note under it says why:</p>
+    <ul>
+      <li><b>Ambiguous</b>: <code>03/04/1985</code> could be 3 April or 4 March. It is read in the Chilean day/month order; check it if the document is from the United States.</li>
+      <li><b>Two-digit year</b>: <code>85</code> was read as 1985.</li>
+      <li><b>No year written</b>: "May 22nd" took its year from the document's own date line. Confirm against the page.</li>
+      <li><b>Unreadable or incomplete</b>: the field is left empty. The app never invents a missing day, month or year; enter it yourself if the page shows it.</li>
+    </ul>
+    <p>Editing a date clears its warning, because you have now checked it.</p>
+
+    <h3>PDF page tags</h3>
+    <p>For PDFs, every name, date and payment has a page tag such as <span class="ui">p.3</span>. Click it to jump the viewer to that page.</p>
+
+    <h3>Committing</h3>
+    <p>When the fields match the original, press <span class="ui">Commit to Case</span>. Only then are actors, timeline events, network links and flags created, and the score recalculated. Names are matched against existing actors, so spelling variants of the same person are merged rather than duplicated.</p>
+    <p>To correct a committed document, press <span class="ui">Edit</span>. This removes its contributions from the case until you commit it again.</p>
+    <p><span class="ui">↻ Re-run AI extraction</span> (top of the review panel, before commit) reads the document again from scratch: useful after an AI service outage or after changing the AI engine. It replaces the unreviewed fields, so it asks you to confirm.</p>
+    <p>The small line <b>Read by …</b> records which AI engine and model read the document, as part of its provenance.</p>
+
+    <h3>Starting a case's analysis over</h3>
+    <p><span class="ui">↻ Re-read all…</span> (next to <span class="ui">+ Manual Entry</span>) keeps every uploaded file, the subject profile, case notes and the watchlist, clears everything derived from earlier readings (names, actors except the subject, timeline, links and flags), and reads every document again. Each document then needs your review and <span class="ui">Commit to Case</span> again. A summary of what will happen is shown before anything changes.</p>
+  </section>
+
+  <section id="en-7">
+    <span class="num">07</span><h2>The case workspace</h2>
+    <div class="grid">
+      <div class="card"><h4>Documents</h4><p>Upload, review and commit, as described above.</p></div>
+      <div class="card"><h4>Network Map</h4><p>Every actor as a node, linked to the subject at the centre. Colour by <b>watchlist</b> tier, by <b>role</b>, or by your own <b>custom</b> colours. Click a bubble to see who they are, every reviewed document naming them (under any spelling, with their role and page), their watchlist match and flags, and to choose their colour. In Custom mode, people without a custom colour keep their watchlist colour.</p></div>
+      <div class="card"><h4>Timeline</h4><p>Every dated event from committed documents in date order. The same event recorded by several documents is one row ("Recorded in N documents"); expand it to see each source. <span class="ui">Exclude</span> keeps noise (such as the issue date of certified copies) on record but out of the timeline flags. <span class="ui">Clean up…</span> previews, then applies, re-dating and re-labelling of events read before the current rules.</p></div>
+      <div class="card"><h4>Actors</h4><p>The deduplicated list of people and organizations. Edit names, roles, notes and colours. <span class="ui">Merge Duplicate Actors</span> suggests pairs that look like the same person; you approve each merge.</p></div>
+      <div class="card"><h4>Financial</h4><p>Every payment recorded in reviewed documents: payment date, amount and currency as written, what it was for, any case number written nearby (highlighted when it differs from this case's), and the source page. Totals are kept per currency, never converted. Payments that raised a financial flag are highlighted.</p></div>
+      <div class="card"><h4>Discrepancies</h4><p>The same fact (subject name, birth, petition and decree dates) as recorded by each document, side by side. Conflicting values are highlighted. Dates are compared by the day they denote, not by how they are written.</p></div>
+      <div class="card"><h4>Flags &amp; Score</h4><p>Every irregularity raised, with its severity and source, and the weighted score. A flag raised by many documents is shown once ("raised by N documents"). <span class="ui">Recompute</span> recalculates on demand.</p></div>
+      <div class="card"><h4>Analysis</h4><p>An AI-written summary and hypotheses about what may have happened, in English or Spanish, drawn only from the reviewed record (see below).</p></div>
+      <div class="card"><h4>Statements</h4><p>Evidence that isn't a scanned document. <b>Testimony</b> records what a person said (who, their relationship to the case, when, how it was obtained, whether they witnessed it first-hand, and whether it is corroborated). A <b>verified finding</b> records something you established and how, such as a DNA test or a registry search. Link each entry to the documents it supports or contradicts and to the people it concerns, and choose whether it raises a flag. Entries are cited in the AI analysis (testimony is treated as what someone said, not as proof) and included in the PDF and JSON exports. Flags raised here are marked "raised by investigator" and do not change the score, which is based on the documents alone.</p></div>
+      <div class="card"><h4>Notes</h4><p>Free-form case notes, saved automatically as you type.</p></div>
+      <div class="card"><h4>Export</h4><p>PDF report and JSON data export (section 11).</p></div>
+    </div>
+  </section>
+
+  <section id="en-8">
+    <span class="num">08</span><h2>Flags and the irregularity score</h2>
+    <h3>What raises each flag</h3>
+    <div class="table"><table>
+      <tr><th>Flag</th><th>Severity</th><th>Raised when</th></tr>
+      <tr><td><b>Pre-Birth Petition Anomaly</b></td><td><span class="sev crit">CRITICAL</span></td><td>An adoption petition is dated before the subject's recorded birth.</td></tr>
+      <tr><td><b>Timeline Irregularity</b></td><td><span class="sev crit">CRITICAL</span></td><td>Fewer than 30 days between the recorded birth and the decree.</td></tr>
+      <tr><td><b>Financial Anomaly</b></td><td><span class="sev high">HIGH</span></td><td>A document describes a payment "por adopción", or a payment is linked to a case number other than this case's own.</td></tr>
+      <tr><td><b>Contradiction</b></td><td><span class="sev med">MEDIUM</span></td><td>The same fact is recorded differently in two or more committed documents.</td></tr>
+      <tr><td><b>Legal Reference</b></td><td><span class="sev med">MEDIUM</span></td><td>A document cites Decree 2465 (1979) or Law 18703, in English or Spanish spelling (e.g. "Decreto Ley 2.465", "Ley N° 18.703"). This marks the document for legal review; it is not itself a finding of a violation.</td></tr>
+      <tr><td><b>Watchlist Match</b></td><td><span class="sev tier">BY TIER</span></td><td>An actor matches a watchlist entry: <span class="t-red">RED</span> → critical, <span class="t-orange">ORANGE</span> → high, <span class="t-yellow">YELLOW</span> → medium.</td></tr>
+    </table></div>
+
+    <h3>How the score is calculated</h3>
+    <p>The <b>Case Irregularity Score</b> runs from 0 to 100. Each flag adds points to its category by severity (critical 50, high 30, medium 18, low 8), with each category capped at 100. The categories are then weighted:</p>
+    <div class="table"><table>
+      <tr><th>Category</th><th>Weight</th><th>Includes</th></tr>
+      <tr><td>Entity match</td><td>35%</td><td>Watchlist matches</td></tr>
+      <tr><td>Timeline</td><td>25%</td><td>Timeline irregularities and pre-birth petitions</td></tr>
+      <tr><td>Financial</td><td>20%</td><td>Financial anomalies</td></tr>
+      <tr><td>Contradictions</td><td>15%</td><td>Contradictions between documents</td></tr>
+      <tr><td>Legal</td><td>5%</td><td>Legal references</td></tr>
+    </table></div>
+    <p>The score is recalculated after every commit, edit, merge or watchlist import. It measures how many documented irregularities a case contains; it is a way to prioritize review, not a conclusion. Only reviewed (committed) documents raise flags, and the same date recorded by several documents counts once.</p>
+
+    <h3>Case analysis (hypotheses)</h3>
+    <p>On the <b>Analysis</b> tab, choose English or Español and press <span class="ui">Generate analysis</span> (one to three minutes). The AI provider chosen in Settings reads the reviewed case record and returns:</p>
+    <ul>
+      <li><b>Summary</b> and <b>established facts</b>, each with source tags such as <span class="ui">D4</span> (document), <span class="ui">E12</span> (timeline event), <span class="ui">F2</span> (flag), <span class="ui">A3</span> (actor) or <span class="ui">X1</span> (discrepancy). Hover over a tag to see the record line it refers to.</li>
+      <li><b>Hypotheses</b> about what may have happened, each with evidence for it, evidence against it or left unexplained, possible benign explanations, a conservative confidence rating, and what would confirm or refute it.</li>
+      <li><b>Gaps</b> in the record, <b>recommended next steps</b>, and <b>data quality notes</b>.</li>
+    </ul>
+    <p>Every source tag is checked against the record after the analysis is written; any reference to something not in the record is removed and the statement is marked as unsupported. Each saved analysis keeps the date, the model, and the exact record it was based on (<span class="ui">Show record analysed</span>), with its fingerprint. Only reviewed documents are included, and the case record is sent as text to the AI provider chosen in Settings (Claude, Grok, OpenAI, Gemini or another provider). The analysis needs a cloud AI; it is not available with the local engine.</p>
+    <div class="callout warn"><span class="icon">!</span><p>An analysis is a set of investigative leads, not evidence, not a legal finding and not a conclusion that anyone did wrong. It carries this disclaimer permanently. Verify every statement against the original documents.</p></div>
+  </section>
+
+  <section id="en-9">
+    <span class="num">09</span><h2>The watchlist</h2>
+    <p>The <b>Investigated Entities</b> page (sidebar) holds your private list of people and organizations from previous investigations. Every actor in every case is compared against it, tolerating spelling variations and scanning errors.</p>
+    <div class="table"><table>
+      <tr><th>Tier</th><th>Intended for</th></tr>
+      <tr><td><span class="t-red">RED</span></td><td>Primary facilitators with direct, documented involvement (for example attorneys, judges, agencies).</td></tr>
+      <tr><td><span class="t-orange">ORANGE</span></td><td>Recurring secondary participants (for example brokers, foster placements, clinics and hospitals named across several cases).</td></tr>
+      <tr><td><span class="t-yellow">YELLOW</span></td><td>Organizations worth tracking (for example receiving agencies abroad, religious orders).</td></tr>
+    </table></div>
+    <ul>
+      <li><b>Add:</b> enter the name and type, choose a tier, press <span class="ui">Add</span>.</li>
+      <li><b>Remove:</b> press <span class="ui">Remove</span> next to the entry.</li>
+      <li><b>Export / import:</b> <span class="ui">Export list (JSON)</span> saves the whole list to a file; <span class="ui">Import list…</span> adds entries from such a file, skipping names already on the list and re-checking every case for new matches. Use this to move your list to another computer.</li>
+    </ul>
+    <div class="callout warn"><span class="icon">!</span><p>The watchlist names real people. A new installation starts with an empty list. Exported list files are <b>not encrypted</b>: store and share them as carefully as the case files themselves.</p></div>
+  </section>
+
+  <section id="en-10">
+    <span class="num">10</span><h2>AI engines, privacy and cost</h2>
+    <p>Choose the engine in <span class="ui">Settings</span> → <b>AI Vision Provider</b>.</p>
+    <div class="table"><table>
+      <tr><th>Engine</th><th>Where documents go</th><th>Quality and speed</th></tr>
+      <tr><td><b>Claude</b> (recommended)</td><td>Each page image is sent over an encrypted connection to Anthropic to be read.</td><td>Most accurate on dense Spanish and English legal documents. About 10 seconds per page. Requires an internet connection and an API key; costs a small amount per page.</td></tr>
+      <tr><td><b>Ollama</b> (local)</td><td>Nothing leaves this computer.</td><td>Works offline at no cost. Less complete on dense documents, so review its results with extra care. Slower, especially the first page after launch.</td></tr>
+      <tr><td>Grok / OpenAI / Gemini</td><td>Sent to xAI, OpenAI or Google respectively.</td><td>Alternatives; each needs its own API key. Choose a model that accepts images.</td></tr>
+      <tr><td>Other AI (OpenRouter, Mistral, DeepSeek, Groq, local server…)</td><td>Sent to the service address you enter.</td><td>Any OpenAI-compatible service. Use <span class="ui">Test connection</span> after saving the address, key and model.</td></tr>
+    </table></div>
+    <ul>
+      <li><b>Fallback:</b> if the selected cloud engine fails (no internet, invalid key), the document is read by the local engine instead. It is never sent to a cloud service you did not select.</li>
+      <li><b>API keys</b> are entered in Settings and are never displayed again after saving. With encryption on, they are stored inside the encrypted vault.</li>
+      <li><b>For investigations where nothing may leave the computer</b>, select Ollama (local).</li>
+    </ul>
+  </section>
+
+  <section id="en-11">
+    <span class="num">11</span><h2>Exporting and backing up</h2>
+    <h3>Exports</h3>
+    <ul>
+      <li><span class="ui">Download PDF Report</span>: subject profile, actors and watchlist matches, timeline, discrepancies, flags and the score breakdown, formatted for a lawyer, an NGO or an investigator.</li>
+      <li><span class="ui">Download JSON Export</span>: the complete case as structured data, for archiving or for other analysis tools.</li>
+    </ul>
+    <div class="callout warn"><span class="icon">!</span><p>Exported files are ordinary, <b>unencrypted</b> files. Handle them as sensitive case material.</p></div>
+    <h3>Where your data lives</h3>
+    <p>Everything is stored in <code>%APPDATA%\RedThread</code> (type that into the File Explorer address bar). It contains the case database, the <code>uploads</code> folder with the documents, and, with encryption on, <code>vault.json</code>, which holds the encrypted keys.</p>
+    <h3>Backing up</h3>
+    <ol class="steps">
+      <li>Close The Red Thread.</li>
+      <li>Copy the whole <code>RedThread</code> folder to an external drive or a secure location.</li>
+    </ol>
+    <p>With encryption on, the backup stays encrypted and opens only with your passphrase or recovery key. Always copy the whole folder: the database and documents cannot be decrypted without <code>vault.json</code>. To restore, close the app and put the folder back in the same place.</p>
+  </section>
+
+  <section id="en-12">
+    <span class="num">12</span><h2>Troubleshooting</h2>
+    <div class="table"><table>
+      <tr><th>Problem</th><th>What to do</th></tr>
+      <tr><td>A dialog says the AI engine could not start</td><td>Press Retry. Antivirus software sometimes holds a newly installed program for a moment. If it persists, restart the computer.</td></tr>
+      <tr><td>The first document takes a long time</td><td>Normal for the local engine after launch (model loading). Later documents are faster.</td></tr>
+      <tr><td>Fields are empty and a yellow warning says the AI could not read the document</td><td>Check the internet connection and the API key in Settings, then press <span class="ui">↻ Re-run AI extraction</span>. You can also fill in the fields by hand.</td></tr>
+      <tr><td>A PDF uploaded with an earlier version shows empty fields</td><td>Earlier versions did not read PDFs. Press <span class="ui">↻ Re-run AI extraction</span>.</td></tr>
+      <tr><td>"PDF is password-protected"</td><td>Remove the password with a PDF tool and upload it again.</td></tr>
+      <tr><td>A date is outlined in amber</td><td>Read the note under it and check the date against the page (section 06).</td></tr>
+      <tr><td>The app went back to the lock screen</td><td>It locked automatically after inactivity. Enter your passphrase; nothing is lost.</td></tr>
+      <tr><td>Forgotten passphrase</td><td>Use the recovery key on the lock screen (section 03).</td></tr>
+    </table></div>
+  </section>
+</div>
+</div>
+
+<!-- ============================================================ ESPAÑOL -->
+<div data-lang="es" lang="es">
+<div class="wrap">
+  <header class="cover">
+    <div class="eyebrow">Manual de usuario · Versión 0.1</div>
+    <h1>El Hilo Rojo</h1>
+    <p class="lede">Una herramienta de análisis forense de casos para investigaciones de adopción. Lee los documentos escaneados del caso, vincula a las personas y organizaciones que aparecen en ellos, construye una línea de tiempo y señala irregularidades. Cada hallazgo es revisado por un investigador antes de incorporarse al caso.</p>
+    <div class="meta">Alderson OSINT Group LLC</div>
+  </header>
+
+  <nav class="toc">
+    <b>Contenido</b>
+    <ol>
+      <li><a href="#es-1">Antes de comenzar</a></li>
+      <li><a href="#es-2">Instalación y primer inicio</a></li>
+      <li><a href="#es-3">Protección de los archivos (cifrado)</a></li>
+      <li><a href="#es-4">Crear un caso</a></li>
+      <li><a href="#es-5">Agregar documentos</a></li>
+      <li><a href="#es-6">Revisar y confirmar</a></li>
+      <li><a href="#es-7">El espacio de trabajo del caso</a></li>
+      <li><a href="#es-8">Alertas y puntaje de irregularidad</a></li>
+      <li><a href="#es-9">La lista de vigilancia</a></li>
+      <li><a href="#es-10">Motores de IA, privacidad y costo</a></li>
+      <li><a href="#es-11">Exportar y respaldar</a></li>
+      <li><a href="#es-12">Solución de problemas</a></li>
+    </ol>
+  </nav>
+
+  <section id="es-1">
+    <span class="num">01</span><h2>Antes de comenzar</h2>
+    <p class="dek">Cómo trata la herramienta la evidencia.</p>
+    <p><b>La IA lee; usted decide.</b> Cada documento es leído por un motor de visión artificial, pero nada de lo que encuentra entra al caso hasta que usted lo compara con el original y presiona <span class="ui">Commit to Case</span> (confirmar en el caso). Considere cada campo generado por la IA como un borrador.</p>
+    <p><b>Los originales nunca se modifican.</b> Los archivos que usted sube se conservan como evidencia. Girar una foto es la única operación que reescribe un archivo, y solo es posible antes de confirmarlo.</p>
+    <p><b>Lenguaje.</b> La herramienta usa un lenguaje cuidadoso y respetuoso con las víctimas: informa <i>irregularidades</i> y <i>anomalías</i>, nunca conclusiones como "tráfico". Una alerta es una razón para mirar con más atención, no la constatación de un delito.</p>
+    <p class="callout"><span class="icon">i</span><span><b>La interfaz de la aplicación está en inglés.</b> En este manual los nombres de botones y pantallas aparecen tal como se ven en pantalla, por ejemplo <span class="ui">Upload Documents</span>, seguidos de su significado en español.</span></p>
+  </section>
+
+  <section id="es-2">
+    <span class="num">02</span><h2>Instalación y primer inicio</h2>
+    <ol class="steps">
+      <li>Ejecute <b>The Red Thread_0.1.0_x64-setup.exe</b> y siga el instalador. Se instala solo para su usuario de Windows y no requiere permisos de administrador. El instalador incluye el motor de IA local, por lo que no se necesita conexión a internet para instalar ni para usar el motor local.</li>
+      <li>Abra <b>The Red Thread</b> desde el menú Inicio o el acceso directo del escritorio. Aparece una pantalla de inicio mientras arrancan el servicio de base de datos y el motor de IA local.</li>
+      <li>El primer inicio puede tardar hasta un minuto mientras la seguridad de Windows revisa los programas recién instalados. Los inicios siguientes son más rápidos.</li>
+    </ol>
+    <div class="callout"><span class="icon">i</span><p>El primer documento que lee el motor de IA <b>local</b> después de cada inicio tarda más (a menudo uno o dos minutos), porque el modelo se carga en memoria. Luego permanece cargado mientras usted trabaja.</p></div>
+  </section>
+
+  <section id="es-3">
+    <span class="num">03</span><h2>Protección de los archivos (cifrado)</h2>
+    <p class="dek">Se recomienda hacerlo antes que nada en una instalación nueva.</p>
+    <p>Con el cifrado activado, la base de datos del caso, cada documento subido y las claves de los servicios de IA quedan cifrados con AES-256 en este computador. Quien copie los archivos sin su frase de contraseña solo verá datos ilegibles. La aplicación se abre en una pantalla de bloqueo y se bloquea sola cuando usted se ausenta.</p>
+
+    <h3>Activar el cifrado</h3>
+    <ol class="steps">
+      <li>Abra <span class="ui">Settings</span> (configuración) en la barra lateral y baje hasta <b>Security</b> (seguridad).</li>
+      <li>Elija una frase de contraseña de al menos 10 caracteres, escríbala dos veces y presione <span class="ui">Turn on encryption</span> (activar cifrado). Una frase larga de varias palabras sin relación entre sí es segura y fácil de recordar.</li>
+      <li>La aplicación cifra todos los datos existentes. Normalmente tarda unos segundos; un caso muy grande puede tardar un minuto. Las copias de respaldo sin cifrar que la propia aplicación guardaba se eliminan de forma segura.</li>
+      <li>Aparece una <b>clave de recuperación</b> con el formato <code>ABCD-EFGH-…</code> (ocho grupos de cuatro caracteres). Guárdela en un lugar distinto de este computador: un gestor de contraseñas, o escrita en papel y guardada en un lugar seguro.</li>
+      <li>Marque <b>I have stored this recovery key somewhere safe</b> (he guardado esta clave en un lugar seguro) y presione <span class="ui">Done</span> (listo). La clave no se vuelve a mostrar.</li>
+    </ol>
+    <div class="callout key"><span class="icon">!</span><p><b>No existe una puerta trasera.</b> Si se pierden tanto la frase de contraseña como la clave de recuperación, nadie puede recuperar los archivos del caso, ni siquiera los desarrolladores. Esto es lo que hace confiable el cifrado.</p></div>
+
+    <h3>Bloquear y desbloquear</h3>
+    <ul>
+      <li><b>Bloquear ahora:</b> presione <span class="ui">Lock</span> (bloquear) al pie de la barra lateral, o <span class="ui">Lock now</span> en Settings → Security.</li>
+      <li><b>Bloqueo automático:</b> tras un período sin actividad (15 minutos por defecto). Puede cambiarlo en Settings → Security: 5, 15, 30 o 60 minutos, o nunca (<i>Never</i>). La aplicación no se bloquea mientras haya documentos en lectura; se bloquea cuando termina la cola.</li>
+      <li><b>Desbloquear:</b> escriba la frase de contraseña en la pantalla de bloqueo. Tras varios intentos fallidos, la aplicación hace más lentos los intentos siguientes.</li>
+    </ul>
+
+    <h3>Si olvida la frase de contraseña</h3>
+    <p>En la pantalla de bloqueo elija <span class="ui">Forgot the passphrase? Use your recovery key</span> (¿olvidó la frase? use su clave de recuperación), ingrese la clave de recuperación (los guiones y las mayúsculas son opcionales) y elija una nueva frase de contraseña. La clave de recuperación sigue funcionando después.</p>
+
+    <h3>Cambiar la frase de contraseña</h3>
+    <p>Settings → Security → <b>Change passphrase</b> (cambiar frase): ingrese la frase actual y la nueva dos veces. No se vuelve a cifrar nada, por lo que el cambio es inmediato. La clave de recuperación no cambia.</p>
+    <div class="callout"><span class="icon">i</span><p>Para una protección completa, active también <b>BitLocker</b> de Windows (cifrado de disco completo) y use una contraseña en su cuenta de Windows. Así se protege todo lo demás en el computador, incluidos archivos temporales que la aplicación no controla.</p></div>
+  </section>
+
+  <section id="es-4">
+    <span class="num">04</span><h2>Crear un caso</h2>
+    <p>Cada caso se construye en torno a una <b>persona sujeto</b>: la persona cuya adopción se investiga. El sujeto es el centro fijo del mapa de red del caso.</p>
+    <ol class="steps">
+      <li>Presione <span class="ui">+ New Case</span> (nuevo caso) en la barra lateral.</li>
+      <li>Complete el <b>número de caso</b> (su propia referencia), un <b>título</b> y el <b>nombre completo</b> del sujeto. Estos tres datos son obligatorios.</li>
+      <li>Opcionalmente agregue <b>alias</b> (separados por comas: otros nombres con que se ha conocido al sujeto, como el nombre recibido tras la adopción), <b>fecha de nacimiento</b>, <b>lugar de nacimiento</b> y <b>notas</b>.</li>
+      <li>Presione <span class="ui">Create Case</span> (crear caso). El caso se abre en su pestaña de documentos.</li>
+    </ol>
+    <h3>El caso de ejemplo</h3>
+    <p>Para aprender a usar la herramienta o hacer una demostración, presione <span class="ui">Load sample case</span> (cargar caso de ejemplo) en la página de nuevo caso. Se crea <b>Sample Case (fictional)</b>: personas, organizaciones, documentos y fechas inventados, dispuestos de modo que aparezca cada tipo de alerta. También agrega tres entradas ficticias a la lista de vigilancia, marcadas como "fictional sample". Elimínelas desde la página Investigated Entities cuando ya no las necesite.</p>
+  </section>
+
+  <section id="es-5">
+    <span class="num">05</span><h2>Agregar documentos</h2>
+    <h3>Subir escaneos y fotos</h3>
+    <ol class="steps">
+      <li>En la pestaña <b>Documents</b> (documentos) del caso, presione <span class="ui">Upload Documents</span> (subir documentos) y seleccione uno o más archivos. Formatos aceptados: <b>JPG, PNG y PDF</b>.</li>
+      <li>Cada archivo aparece en la lista con una etiqueta de estado: <b>pending</b> (en espera), <b>processing</b> (en lectura), <b>extracted</b> (listo para su revisión), <b>reviewed</b> (confirmado) o <b>error</b>.</li>
+      <li>Los documentos se leen de uno en uno, con unos segundos de separación, para no sobrecargar el motor de IA. Puede seguir trabajando mientras se procesan.</li>
+    </ol>
+    <p><b>Los PDF de varias páginas</b> se leen página por página. Se leen automáticamente hasta 40 páginas por archivo; si el archivo es más largo, un mensaje le indica qué páginas debe ingresar a mano.</p>
+    <p><b>Las fotos de teléfono</b> se reducen de tamaño en memoria antes de enviarlas a la IA. El original guardado conserva su resolución completa.</p>
+
+    <h3>Entradas manuales</h3>
+    <p>Para información sin documento escaneado (una llamada, un registro público, lo que dijo un testigo), presione <span class="ui">+ Manual Entry</span> (entrada manual), asígnele un nombre y complete a mano el mismo formulario de revisión.</p>
+
+    <h3>Fotos duplicadas</h3>
+    <p>Cuando una misma página se fotografió dos veces, aparece sobre la lista un panel <b>Possible duplicate photos</b> (posibles fotos duplicadas). Presione <span class="ui">Compare…</span> (comparar), o haga clic en las dos miniaturas, para ver ambas copias lado a lado, con zoom vinculado <span class="ui">Fit</span> / <span class="ui">50%</span> / <span class="ui">100%</span> y lo que se leyó de cada una. Luego elija <span class="ui">Keep left · delete right</span> (conservar la izquierda, eliminar la derecha), <span class="ui">Keep right · delete left</span> (al revés) o <span class="ui">Not duplicates: keep both</span> (no son duplicadas). Eliminar siempre pide una segunda confirmación y advierte si esa copia ya fue revisada. La decisión "no son duplicadas" se recuerda. Las copias idénticas píxel a píxel se pueden eliminar de una vez con <span class="ui">Clean up … exact duplicate(s)</span>, que conserva la primera subida de cada una.</p>
+
+    <h3>Fotos de lado</h3>
+    <p>Seleccione el documento y presione <span class="ui">⟳ Rotate</span> (girar) sobre la imagen; la IA vuelve a leerla en la nueva orientación. El giro está disponible para imágenes (no para PDF) y solo antes de confirmar el documento.</p>
+  </section>
+
+  <section id="es-6">
+    <span class="num">06</span><h2>Revisar y confirmar</h2>
+    <p class="dek">El paso más importante: comparar la lectura de la IA con el original.</p>
+    <p>Seleccione un documento. El <b>visor</b> del centro muestra el original; el <b>panel de revisión</b> de la derecha muestra lo que encontró la IA, en campos editables.</p>
+
+    <h3>Uso del visor</h3>
+    <ul>
+      <li>Las imágenes se abren ajustadas al panel. Use <span class="ui">−</span> y <span class="ui">+</span> (o <b>Ctrl + rueda del mouse</b>) para hacer zoom entre 5% y 400%, <span class="ui">Fit</span> (ajustar) para ver la página completa y <span class="ui">100%</span> para el tamaño real. Desplácese para recorrer una página ampliada.</li>
+      <li>Los PDF se abren en el visor de PDF integrado.</li>
+    </ul>
+
+    <h3>Los campos de revisión</h3>
+    <ul>
+      <li><b>Document Type</b> (tipo de documento): petición, decreto, certificado de nacimiento, recibo de pago, correspondencia, registro médico, registro migratorio, registro judicial u otro.</li>
+      <li><b>Names</b> (nombres): cada persona y organización de la página, con su función. Corrija errores de ortografía, elimine lo que no sea una persona u organización real y agregue los nombres que la IA omitió.</li>
+      <li><b>Dates</b> (fechas): cada una con una etiqueta (<i>birth</i> nacimiento, <i>petition_filed</i> presentación de la petición, <i>decree_issued</i> dictación del decreto, <i>payment</i> pago, <i>document_date</i> fecha del documento, <i>other</i> otra). Vea más abajo.</li>
+      <li><b>Financial Transactions</b> (transacciones financieras): monto, moneda, concepto y cualquier número de causa o expediente escrito junto al pago.</li>
+      <li><b>Legal References</b> (referencias legales): números de leyes y decretos, separados por comas.</li>
+      <li><b>Notes</b> (notas): la breve descripción de la página hecha por la IA.</li>
+    </ul>
+
+    <h3>Cómo se tratan las fechas</h3>
+    <p>Las fechas se convierten a un formato estándar sin importar cómo las escriba el documento: <code>24/08/1983</code>, <code>24 de agosto de 1983</code>, <code>August 24, 1983</code>, o escritas en palabras al estilo notarial. Bajo cada fecha se muestra la redacción original como <b>As written: "…"</b> (tal como está escrita).</p>
+    <p>Una fecha con <b style="color:var(--warn)">borde ámbar</b> requiere su atención. La nota bajo ella explica el motivo:</p>
+    <ul>
+      <li><b>Ambigua</b>: <code>03/04/1985</code> puede ser 3 de abril o 4 de marzo. Se lee en el orden chileno día/mes; verifíquela si el documento es de Estados Unidos.</li>
+      <li><b>Año de dos dígitos</b>: <code>85</code> se leyó como 1985.</li>
+      <li><b>Sin año escrito</b>: "22 de mayo" tomó el año de la fecha del propio documento. Confírmelo con la página.</li>
+      <li><b>Ilegible o incompleta</b>: el campo queda vacío. La aplicación nunca inventa un día, mes o año faltante; ingréselo usted si la página lo muestra.</li>
+    </ul>
+    <p>Al editar una fecha desaparece su advertencia, porque usted ya la verificó.</p>
+
+    <h3>Etiquetas de página en los PDF</h3>
+    <p>En los PDF, cada nombre, fecha y pago tiene una etiqueta de página como <span class="ui">p.3</span>. Haga clic en ella para llevar el visor a esa página.</p>
+
+    <h3>Confirmar</h3>
+    <p>Cuando los campos coincidan con el original, presione <span class="ui">Commit to Case</span> (confirmar en el caso). Solo entonces se crean los actores, los eventos de la línea de tiempo, los vínculos de la red y las alertas, y se recalcula el puntaje. Los nombres se comparan con los actores existentes, de modo que las variantes de ortografía de una misma persona se fusionan en lugar de duplicarse.</p>
+    <p>Para corregir un documento ya confirmado, presione <span class="ui">Edit</span> (editar). Sus aportes se retiran del caso hasta que lo vuelva a confirmar.</p>
+    <p><span class="ui">↻ Re-run AI extraction</span> (volver a leer con IA; parte superior del panel, antes de confirmar) lee el documento de nuevo desde cero: útil tras una interrupción del servicio de IA o tras cambiar de motor. Reemplaza los campos no revisados, por lo que pide confirmación.</p>
+    <p>La pequeña línea <b>Read by …</b> (leído por) registra qué motor y modelo de IA leyó el documento, como parte de su trazabilidad.</p>
+
+    <h3>Empezar de nuevo el análisis de un caso</h3>
+    <p><span class="ui">↻ Re-read all…</span> (volver a leer todo; junto a <span class="ui">+ Manual Entry</span>) conserva todos los archivos subidos, el perfil del sujeto, las notas del caso y la lista de vigilancia; borra todo lo derivado de lecturas anteriores (nombres, actores salvo el sujeto, línea de tiempo, vínculos y alertas) y vuelve a leer cada documento. Luego cada documento debe revisarse y confirmarse otra vez con <span class="ui">Commit to Case</span>. Antes de cambiar nada se muestra un resumen de lo que ocurrirá.</p>
+  </section>
+
+  <section id="es-7">
+    <span class="num">07</span><h2>El espacio de trabajo del caso</h2>
+    <div class="grid">
+      <div class="card"><h4>Documents (documentos)</h4><p>Subir, revisar y confirmar, como se describe arriba.</p></div>
+      <div class="card"><h4>Network Map (mapa de red)</h4><p>Cada actor como un nodo, vinculado al sujeto en el centro. Coloree por nivel de la lista de vigilancia (<b>watchlist</b>), por función (<b>role</b>) o con sus propios colores (<b>custom</b>). Haga clic en una burbuja para ver quién es, cada documento revisado que lo nombra (con cualquier ortografía, su función y la página), su coincidencia con la lista y sus alertas, y para elegir su color. En el modo Custom, quienes no tienen color propio conservan el color de la lista de vigilancia.</p></div>
+      <div class="card"><h4>Timeline (línea de tiempo)</h4><p>Cada evento fechado de los documentos confirmados, en orden cronológico. Un mismo evento registrado en varios documentos aparece en una sola fila ("Recorded in N documents"); despliéguela para ver cada fuente. <span class="ui">Exclude</span> (excluir) mantiene en el registro el ruido (como la fecha de emisión de copias certificadas) pero lo deja fuera de las alertas. <span class="ui">Clean up…</span> (limpiar) muestra primero y luego aplica la corrección de fechas y etiquetas de eventos leídos antes de las reglas actuales.</p></div>
+      <div class="card"><h4>Actors (actores)</h4><p>La lista depurada de personas y organizaciones. Edite nombres, funciones, notas y colores. <span class="ui">Merge Duplicate Actors</span> (fusionar actores duplicados) sugiere pares que parecen ser la misma persona; usted aprueba cada fusión.</p></div>
+      <div class="card"><h4>Financial (finanzas)</h4><p>Cada pago registrado en documentos revisados: fecha de pago, monto y moneda tal como están escritos, concepto, cualquier número de causa escrito al lado (destacado si difiere del de este caso) y la página de origen. Los totales se llevan por moneda, sin conversiones. Los pagos que generaron una alerta financiera aparecen destacados.</p></div>
+      <div class="card"><h4>Discrepancies (discrepancias)</h4><p>Un mismo dato (nombre del sujeto, fechas de nacimiento, petición y decreto) tal como lo registra cada documento, lado a lado. Los valores en conflicto se destacan. Las fechas se comparan por el día que indican, no por cómo están escritas.</p></div>
+      <div class="card"><h4>Flags &amp; Score (alertas y puntaje)</h4><p>Cada irregularidad detectada, con su gravedad y origen, y el puntaje ponderado. Una alerta generada por muchos documentos aparece una sola vez ("raised by N documents"). <span class="ui">Recompute</span> (recalcular) lo actualiza cuando usted quiera.</p></div>
+      <div class="card"><h4>Analysis (análisis)</h4><p>Un resumen e hipótesis sobre lo que pudo haber ocurrido, redactados por IA en inglés o español, basados solo en el registro revisado (ver más abajo).</p></div>
+      <div class="card"><h4>Statements (declaraciones)</h4><p>Evidencia que no es un documento escaneado. Un <b>testimonio</b> registra lo que dijo una persona (quién, su relación con el caso, cuándo, cómo se obtuvo, si lo presenció directamente y si está corroborado). Un <b>hallazgo verificado</b> registra algo que usted comprobó y cómo, por ejemplo un examen de ADN o una búsqueda en el registro civil. Vincule cada entrada a los documentos que respalda o contradice y a las personas que menciona, y elija si genera una alerta. Las entradas se citan en el análisis con IA (el testimonio se trata como lo que alguien dijo, no como prueba) y se incluyen en las exportaciones PDF y JSON. Las alertas generadas aquí se marcan "raised by investigator" y no cambian el puntaje, que se basa solo en los documentos.</p></div>
+      <div class="card"><h4>Notes (notas)</h4><p>Notas libres del caso, que se guardan automáticamente mientras escribe.</p></div>
+      <div class="card"><h4>Export (exportar)</h4><p>Informe PDF y exportación de datos JSON (sección 11).</p></div>
+    </div>
+  </section>
+
+  <section id="es-8">
+    <span class="num">08</span><h2>Alertas y puntaje de irregularidad</h2>
+    <h3>Qué activa cada alerta</h3>
+    <div class="table"><table>
+      <tr><th>Alerta</th><th>Gravedad</th><th>Se activa cuando</th></tr>
+      <tr><td><b>Petición anterior al nacimiento</b><br><small>Pre-Birth Petition Anomaly</small></td><td><span class="sev crit">CRÍTICA</span></td><td>Una petición de adopción tiene fecha anterior al nacimiento registrado del sujeto.</td></tr>
+      <tr><td><b>Irregularidad de plazos</b><br><small>Timeline Irregularity</small></td><td><span class="sev crit">CRÍTICA</span></td><td>Menos de 30 días entre el nacimiento registrado y el decreto.</td></tr>
+      <tr><td><b>Anomalía financiera</b><br><small>Financial Anomaly</small></td><td><span class="sev high">ALTA</span></td><td>Un documento describe un pago "por adopción", o un pago está vinculado a un número de causa distinto del de este caso.</td></tr>
+      <tr><td><b>Contradicción</b><br><small>Contradiction</small></td><td><span class="sev med">MEDIA</span></td><td>Un mismo dato aparece registrado de forma distinta en dos o más documentos confirmados.</td></tr>
+      <tr><td><b>Referencia legal</b><br><small>Legal Reference</small></td><td><span class="sev med">MEDIA</span></td><td>Un documento cita el Decreto Ley 2465 (1979) o la Ley 18.703, en escritura inglesa o española (p. ej. "Decreto Ley 2.465", "Ley N° 18.703"). Marca el documento para revisión jurídica; no constituye por sí misma la constatación de una infracción.</td></tr>
+      <tr><td><b>Coincidencia con la lista</b><br><small>Watchlist Match</small></td><td><span class="sev tier">SEGÚN NIVEL</span></td><td>Un actor coincide con una entrada de la lista de vigilancia: <span class="t-red">ROJO</span> → crítica, <span class="t-orange">NARANJA</span> → alta, <span class="t-yellow">AMARILLO</span> → media.</td></tr>
+    </table></div>
+
+    <h3>Cómo se calcula el puntaje</h3>
+    <p>El <b>puntaje de irregularidad del caso</b> (Case Irregularity Score) va de 0 a 100. Cada alerta suma puntos a su categoría según su gravedad (crítica 50, alta 30, media 18, baja 8), con un máximo de 100 por categoría. Luego las categorías se ponderan:</p>
+    <div class="table"><table>
+      <tr><th>Categoría</th><th>Peso</th><th>Incluye</th></tr>
+      <tr><td>Coincidencia de entidades</td><td>35%</td><td>Coincidencias con la lista de vigilancia</td></tr>
+      <tr><td>Plazos</td><td>25%</td><td>Irregularidades de plazos y peticiones anteriores al nacimiento</td></tr>
+      <tr><td>Financiera</td><td>20%</td><td>Anomalías financieras</td></tr>
+      <tr><td>Contradicciones</td><td>15%</td><td>Contradicciones entre documentos</td></tr>
+      <tr><td>Legal</td><td>5%</td><td>Referencias legales</td></tr>
+    </table></div>
+    <p>El puntaje se recalcula tras cada confirmación, edición, fusión o importación de la lista. Mide cuántas irregularidades documentadas contiene un caso; sirve para priorizar la revisión, no es una conclusión. Solo los documentos revisados (confirmados) generan alertas, y una misma fecha registrada en varios documentos cuenta una sola vez.</p>
+
+    <h3>Análisis del caso (hipótesis)</h3>
+    <p>En la pestaña <b>Analysis</b>, elija English o Español y presione <span class="ui">Generate analysis</span> (generar análisis; de uno a tres minutos). El proveedor de IA elegido en Settings lee el registro revisado del caso y entrega:</p>
+    <ul>
+      <li>Un <b>resumen</b> y los <b>hechos establecidos</b>, cada uno con etiquetas de fuente como <span class="ui">D4</span> (documento), <span class="ui">E12</span> (evento de la línea de tiempo), <span class="ui">F2</span> (alerta), <span class="ui">A3</span> (actor) o <span class="ui">X1</span> (discrepancia). Pase el mouse sobre una etiqueta para ver la línea del registro a la que se refiere.</li>
+      <li><b>Hipótesis</b> sobre lo que pudo haber ocurrido, cada una con la evidencia a favor, la evidencia en contra o sin explicar, posibles explicaciones inocentes, un nivel de confianza conservador y qué la confirmaría o refutaría.</li>
+      <li><b>Vacíos</b> en el registro, <b>próximos pasos recomendados</b> y <b>notas sobre la calidad de los datos</b>.</li>
+    </ul>
+    <p>Cada etiqueta de fuente se verifica con el registro después de redactado el análisis; toda referencia a algo que no está en el registro se elimina y la afirmación se marca como no respaldada. Cada análisis guardado conserva la fecha, el modelo y el registro exacto en que se basó (<span class="ui">Show record analysed</span>), con su huella digital. Solo se incluyen documentos revisados, y el registro del caso se envía como texto al proveedor de IA elegido en Settings (Claude, Grok, OpenAI, Gemini u otro). El análisis necesita una IA en la nube; no está disponible con el motor local.</p>
+    <div class="callout warn"><span class="icon">!</span><p>Un análisis es un conjunto de pistas de investigación: no es evidencia, ni una conclusión jurídica, ni la constatación de que alguien haya actuado mal. Lleva este aviso de forma permanente. Verifique cada afirmación con los documentos originales.</p></div>
+  </section>
+
+  <section id="es-9">
+    <span class="num">09</span><h2>La lista de vigilancia</h2>
+    <p>La página <b>Investigated Entities</b> (entidades investigadas, en la barra lateral) contiene su lista privada de personas y organizaciones de investigaciones anteriores. Cada actor de cada caso se compara con ella, tolerando variaciones de ortografía y errores de escaneo.</p>
+    <div class="table"><table>
+      <tr><th>Nivel</th><th>Pensado para</th></tr>
+      <tr><td><span class="t-red">ROJO</span> (RED)</td><td>Facilitadores principales con participación directa y documentada (por ejemplo abogados, jueces, agencias).</td></tr>
+      <tr><td><span class="t-orange">NARANJA</span> (ORANGE)</td><td>Participantes secundarios recurrentes (por ejemplo intermediarios, hogares de acogida, clínicas y hospitales mencionados en varios casos).</td></tr>
+      <tr><td><span class="t-yellow">AMARILLO</span> (YELLOW)</td><td>Organizaciones que conviene seguir (por ejemplo agencias receptoras en el extranjero, órdenes religiosas).</td></tr>
+    </table></div>
+    <ul>
+      <li><b>Agregar:</b> ingrese el nombre y el tipo, elija un nivel y presione <span class="ui">Add</span> (agregar).</li>
+      <li><b>Quitar:</b> presione <span class="ui">Remove</span> (quitar) junto a la entrada.</li>
+      <li><b>Exportar / importar:</b> <span class="ui">Export list (JSON)</span> guarda la lista completa en un archivo; <span class="ui">Import list…</span> agrega las entradas de un archivo así, omitiendo los nombres que ya están en la lista y revisando todos los casos en busca de nuevas coincidencias. Úselo para llevar su lista a otro computador.</li>
+    </ul>
+    <div class="callout warn"><span class="icon">!</span><p>La lista de vigilancia contiene nombres de personas reales. Una instalación nueva comienza con la lista vacía. Los archivos de lista exportados <b>no están cifrados</b>: guárdelos y compártalos con el mismo cuidado que los archivos del caso.</p></div>
+  </section>
+
+  <section id="es-10">
+    <span class="num">10</span><h2>Motores de IA, privacidad y costo</h2>
+    <p>Elija el motor en <span class="ui">Settings</span> → <b>AI Vision Provider</b> (proveedor de visión artificial).</p>
+    <div class="table"><table>
+      <tr><th>Motor</th><th>Adónde van los documentos</th><th>Calidad y velocidad</th></tr>
+      <tr><td><b>Claude</b> (recomendado)</td><td>La imagen de cada página se envía por una conexión cifrada a Anthropic para su lectura.</td><td>El más preciso con documentos legales densos en español e inglés. Unos 10 segundos por página. Requiere conexión a internet y una clave de API; tiene un pequeño costo por página.</td></tr>
+      <tr><td><b>Ollama</b> (local)</td><td>Nada sale de este computador.</td><td>Funciona sin conexión y sin costo. Es menos completo con documentos densos, así que revise sus resultados con especial cuidado. Es más lento, sobre todo la primera página tras el inicio.</td></tr>
+      <tr><td>Grok / OpenAI / Gemini</td><td>Se envían a xAI, OpenAI o Google, respectivamente.</td><td>Alternativas; cada una requiere su propia clave de API. Elija un modelo que acepte imágenes.</td></tr>
+      <tr><td>Otra IA (OpenRouter, Mistral, DeepSeek, Groq, servidor local…)</td><td>Se envían a la dirección del servicio que usted ingrese.</td><td>Cualquier servicio compatible con OpenAI. Use <span class="ui">Test connection</span> tras guardar la dirección, la clave y el modelo.</td></tr>
+    </table></div>
+    <ul>
+      <li><b>Respaldo automático:</b> si el motor en la nube elegido falla (sin internet, clave inválida), el documento lo lee el motor local. Nunca se envía a un servicio en la nube que usted no haya elegido.</li>
+      <li><b>Las claves de API</b> se ingresan en Settings y no se vuelven a mostrar tras guardarlas. Con el cifrado activado, se guardan dentro de la bóveda cifrada.</li>
+      <li><b>Para investigaciones en las que nada puede salir del computador</b>, elija Ollama (local).</li>
+    </ul>
+  </section>
+
+  <section id="es-11">
+    <span class="num">11</span><h2>Exportar y respaldar</h2>
+    <h3>Exportaciones</h3>
+    <ul>
+      <li><span class="ui">Download PDF Report</span> (descargar informe PDF): perfil del sujeto, actores y coincidencias con la lista, línea de tiempo, discrepancias, alertas y el desglose del puntaje, con formato listo para un abogado, una ONG o un investigador.</li>
+      <li><span class="ui">Download JSON Export</span> (descargar exportación JSON): el caso completo como datos estructurados, para archivo o para otras herramientas de análisis.</li>
+    </ul>
+    <div class="callout warn"><span class="icon">!</span><p>Los archivos exportados son archivos comunes, <b>no cifrados</b>. Trátelos como material sensible del caso.</p></div>
+    <h3>Dónde se guardan sus datos</h3>
+    <p>Todo se guarda en <code>%APPDATA%\RedThread</code> (escríbalo en la barra de direcciones del Explorador de archivos). Contiene la base de datos del caso, la carpeta <code>uploads</code> con los documentos y, con el cifrado activado, <code>vault.json</code>, que guarda las claves cifradas.</p>
+    <h3>Respaldar</h3>
+    <ol class="steps">
+      <li>Cierre The Red Thread.</li>
+      <li>Copie la carpeta <code>RedThread</code> completa a un disco externo o a un lugar seguro.</li>
+    </ol>
+    <p>Con el cifrado activado, el respaldo sigue cifrado y solo se abre con su frase de contraseña o su clave de recuperación. Copie siempre la carpeta completa: la base de datos y los documentos no se pueden descifrar sin <code>vault.json</code>. Para restaurar, cierre la aplicación y vuelva a poner la carpeta en el mismo lugar.</p>
+  </section>
+
+  <section id="es-12">
+    <span class="num">12</span><h2>Solución de problemas</h2>
+    <div class="table"><table>
+      <tr><th>Problema</th><th>Qué hacer</th></tr>
+      <tr><td>Un aviso dice que el motor de IA no pudo iniciar</td><td>Presione Retry (reintentar). A veces el antivirus retiene por un momento un programa recién instalado. Si continúa, reinicie el computador.</td></tr>
+      <tr><td>El primer documento tarda mucho</td><td>Es normal con el motor local tras el inicio (carga del modelo). Los documentos siguientes son más rápidos.</td></tr>
+      <tr><td>Los campos están vacíos y un aviso amarillo dice que la IA no pudo leer el documento</td><td>Revise la conexión a internet y la clave de API en Settings, y luego presione <span class="ui">↻ Re-run AI extraction</span>. También puede completar los campos a mano.</td></tr>
+      <tr><td>Un PDF subido con una versión anterior aparece con campos vacíos</td><td>Las versiones anteriores no leían PDF. Presione <span class="ui">↻ Re-run AI extraction</span>.</td></tr>
+      <tr><td>"PDF is password-protected" (el PDF tiene contraseña)</td><td>Quite la contraseña con una herramienta de PDF y vuelva a subirlo.</td></tr>
+      <tr><td>Una fecha aparece con borde ámbar</td><td>Lea la nota que aparece debajo y compare la fecha con la página (sección 06).</td></tr>
+      <tr><td>La aplicación volvió a la pantalla de bloqueo</td><td>Se bloqueó automáticamente por inactividad. Ingrese su frase de contraseña; no se pierde nada.</td></tr>
+      <tr><td>Olvidé la frase de contraseña</td><td>Use la clave de recuperación en la pantalla de bloqueo (sección 03).</td></tr>
+    </table></div>
+  </section>
+</div>
+</div>
+
+<footer>THE RED THREAD · EL HILO ROJO — ALDERSON OSINT GROUP LLC</footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    function pick() {
+      var fromUrl = new URLSearchParams(location.search).get('lang');
+      if (fromUrl === 'en' || fromUrl === 'es') return fromUrl;
+      try { var saved = localStorage.getItem('redthread-manual-lang'); if (saved) return saved; } catch (e) {}
+      return (navigator.language || 'en').toLowerCase().indexOf('es') === 0 ? 'es' : 'en';
+    }
+    function set(lang) {
+      root.setAttribute('data-active', lang);
+      root.setAttribute('lang', lang);
+      document.querySelectorAll('[data-set]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.set === lang)); });
+      try { localStorage.setItem('redthread-manual-lang', lang); } catch (e) {}
+    }
+    document.querySelectorAll('[data-set]').forEach(function (b) { b.addEventListener('click', function () { set(b.dataset.set); }); });
+    set(pick());
+  })();
+</script>
+</body>
+</html>
