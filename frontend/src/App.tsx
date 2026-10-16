@@ -6,6 +6,7 @@ import { VaultGate } from './context/VaultContext'
 import { CaseIntake } from './pages/CaseIntake'
 import { CaseWorkspace } from './pages/CaseWorkspace'
 import { HelpPage } from './pages/HelpPage'
+import { RecurringActorsPage } from './pages/RecurringActorsPage'
 import { SettingsPage } from './pages/SettingsPage'
 import { WatchlistPage } from './pages/WatchlistPage'
 
@@ -32,6 +33,7 @@ function AppShell() {
             <Route path="/intake" element={<CaseIntake />} />
             <Route path="/cases/:caseId" element={<CaseWorkspace />} />
             <Route path="/watchlist" element={<WatchlistPage />} />
+            <Route path="/recurring" element={<RecurringActorsPage />} />
             <Route path="/settings" element={<SettingsPage />} />
             <Route path="/help" element={<HelpPage />} />
           </Routes>

@@ -266,3 +266,18 @@ class WatchlistEntity(Base):
     entity_type = Column(String, nullable=True)
     notes = Column(Text, nullable=True)
     is_seed = Column(Boolean, default=False)  # seeded default vs user-added
+
+
+class CrossCaseDecision(Base):
+    """The investigator's call on whether two actors in different cases are
+    the same person. Keyed by case and folded name (not actor id) so it
+    survives Re-read all, which recreates a case's actors."""
+    __tablename__ = "cross_case_decisions"
+
+    id = Column(String, primary_key=True, default=gen_id)
+    case_a_id = Column(String, ForeignKey("cases.id", ondelete="CASCADE"), nullable=False)
+    name_a = Column(String, nullable=False)
+    case_b_id = Column(String, ForeignKey("cases.id", ondelete="CASCADE"), nullable=False)
+    name_b = Column(String, nullable=False)
+    decision = Column(String, nullable=False)  # "confirmed" | "rejected"
+    created_at = Column(DateTime, default=datetime.utcnow)

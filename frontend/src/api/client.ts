@@ -1,7 +1,7 @@
 import axios from 'axios'
 import type {
   Actor, ActorDetails, AppSettings, AppSettingsUpdate, CaseAnalysisOut, StatementIn, StatementOut, CaseDetail, CaseScoreOut, CaseSummary, DiscrepancyGroup,
-  DocumentOut, DuplicateDocumentSuggestion, Edge, ExtractionResult, FlagOut, MergeSuggestion,
+  DocumentOut, DuplicateDocumentSuggestion, Edge, ExtractionResult, FlagOut, MergeSuggestion, RecurringActor, RecurringTier, SeparatedPair,
   TimelineCleanupPlan, TimelineEventOut, VaultStatus, WatchlistCategory, WatchlistEntityOut,
 } from '../types'
 
@@ -148,6 +148,14 @@ export const api = {
     unwrap<CaseAnalysisOut>(http.get(`/api/cases/${caseId}/analyses/${analysisId}/record`)),
   deleteAnalysis: (caseId: string, analysisId: string) =>
     unwrap<void>(http.delete(`/api/cases/${caseId}/analyses/${analysisId}`)),
+
+  listRecurringActors: () => unwrap<RecurringActor[]>(http.get('/api/recurring-actors')),
+  getRecurringInCase: (caseId: string) =>
+    unwrap<Record<string, { other_cases: number; tier: RecurringTier }>>(http.get(`/api/recurring-actors/case/${caseId}`)),
+  decideRecurring: (payload: { actor_ids: string[]; against?: string[]; decision: 'confirmed' | 'rejected' | 'clear' }) =>
+    unwrap<{ pairs: number }>(http.post('/api/recurring-actors/decisions', payload)),
+  listSeparatedPairs: () => unwrap<SeparatedPair[]>(http.get('/api/recurring-actors/separated')),
+  undoSeparation: (id: string) => unwrap<void>(http.delete(`/api/recurring-actors/separated/${id}`)),
 
   listWatchlist: () => unwrap<WatchlistEntityOut[]>(http.get('/api/watchlist')),
   createWatchlistEntity: (payload: { name: string; aliases: string[]; category: WatchlistCategory; entity_type: string | null; notes: string | null }) =>

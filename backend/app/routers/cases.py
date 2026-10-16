@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.core.db import get_db
-from app.models.models import Case, Subject
+from app.models.models import Case, CrossCaseDecision, Subject
 from app.schemas import schemas
 
 router = APIRouter(prefix="/api/cases", tags=["cases"])
@@ -64,6 +64,9 @@ def delete_case(case_id: str, db: Session = Depends(get_db)):
     case = db.query(Case).filter(Case.id == case_id).first()
     if case is None:
         raise HTTPException(404, "Case not found")
+    db.query(CrossCaseDecision).filter(
+        (CrossCaseDecision.case_a_id == case_id) | (CrossCaseDecision.case_b_id == case_id)
+    ).delete(synchronize_session=False)
     db.delete(case)
     db.commit()
     return None

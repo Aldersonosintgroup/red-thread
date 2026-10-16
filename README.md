@@ -42,6 +42,7 @@ We believe the truth belongs to the people it was taken from, and that justice m
 | **Discrepancies** | Every place the documents disagree: two different birth dates, name variants, conflicting case numbers. |
 | **Financial** | Every payment and fee, with totals kept per currency (historical pesos and dollars are never added together). |
 | **Network map** | Everyone named in the case and how they connect. Click a person for every document that mentions them and the flags that concern them. |
+| **Recurring actors** | People and organizations named in more than one case, so a facilitator, notary or clinic that recurs across unrelated families stands out. Spelling variants, accents, titles and surname initials are taken into account; every match is graded and confirmed or separated by the investigator, never merged automatically. |
 | **AI analysis** | A written summary and hypotheses about what may have happened, each with evidence for and against it. Every citation is checked against the case record, and anything unsupported is marked as such. |
 | **Export** | A complete PDF case report, or the full case as JSON. |
 

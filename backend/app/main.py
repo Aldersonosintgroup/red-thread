@@ -9,8 +9,8 @@ from fastapi.responses import JSONResponse
 from app.core import database_lifecycle, vault
 from app.core.db import DatabaseLocked
 from app.routers import (
-    analysis_router, cases, documents, entities, scoring, export, settings_router, vault_router, sample_router,
-    statements,
+    analysis_router, cases, correlation_router, documents, entities, scoring, export, settings_router, vault_router,
+    sample_router, statements,
 )
 from app.services import queue_processor
 
@@ -60,7 +60,7 @@ async def lifespan(app: FastAPI):
     auto_lock.cancel()
 
 
-app = FastAPI(title="The Red Thread", version="0.1.0", lifespan=lifespan)
+app = FastAPI(title="The Red Thread", version="0.2.0", lifespan=lifespan)
 
 
 @app.middleware("http")
@@ -110,6 +110,7 @@ app.include_router(vault_router.router)
 app.include_router(sample_router.router)
 app.include_router(analysis_router.router)
 app.include_router(statements.router)
+app.include_router(correlation_router.router)
 
 
 @app.get("/api/health")

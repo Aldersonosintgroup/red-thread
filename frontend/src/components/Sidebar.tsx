@@ -92,6 +92,13 @@ export function Sidebar() {
           ? Help &amp; guide
         </button>
         <button
+          onClick={() => navigate('/recurring')}
+          title="People and organizations named in more than one case"
+          className="w-full text-neutral-400 hover:text-neutral-200 text-sm py-1.5 text-left px-2"
+        >
+          Recurring Actors
+        </button>
+        <button
           onClick={() => navigate('/watchlist')}
           className="w-full text-neutral-400 hover:text-neutral-200 text-sm py-1.5 text-left px-2"
         >

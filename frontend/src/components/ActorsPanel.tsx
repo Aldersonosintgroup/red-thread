@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { api, ApiError } from '../api/client'
-import type { Actor, MergeSuggestion } from '../types'
+import { useNavigate } from 'react-router-dom'
+import type { Actor, MergeSuggestion, RecurringTier } from '../types'
 import { CategoryBadge } from './Badge'
 import { useWatchlistLookup } from '../hooks/useWatchlistLookup'
 
@@ -13,10 +14,13 @@ export function ActorsPanel({ caseId }: { caseId: string }) {
   const [mergeTarget, setMergeTarget] = useState('')
   const [editingId, setEditingId] = useState<string | null>(null)
   const watchlist = useWatchlistLookup()
+  const [recurring, setRecurring] = useState<Record<string, { other_cases: number; tier: RecurringTier }>>({})
+  const navigate = useNavigate()
 
   async function load() {
     try {
       setActors(await api.listActors(caseId))
+      api.getRecurringInCase(caseId).then(setRecurring).catch(() => setRecurring({}))
     } catch (err) {
       setError(err instanceof ApiError ? err.message : 'Failed to load actors.')
     }
@@ -85,6 +89,15 @@ export function ActorsPanel({ caseId }: { caseId: string }) {
                         {actor.canonical_name}
                         {actor.is_subject && <span className="text-xs text-purple-300 bg-purple-900/40 border border-purple-700 rounded px-1.5">SUBJECT</span>}
                         {watchlistEntity && <CategoryBadge category={watchlistEntity.category} />}
+                        {recurring[actor.id] && (
+                          <button
+                            onClick={() => navigate('/recurring')}
+                            title={`Also named in ${recurring[actor.id].other_cases} other case(s) (${recurring[actor.id].tier} match). Open Recurring Actors.`}
+                            className="text-xs text-red-300 bg-red-950/50 border border-red-800 rounded px-1.5 hover:bg-red-900/50"
+                          >
+                            +{recurring[actor.id].other_cases} other case{recurring[actor.id].other_cases === 1 ? '' : 's'}
+                          </button>
+                        )}
                       </div>
                       <div className="text-xs text-neutral-500 truncate">
                         {actor.role ?? 'No role recorded'}

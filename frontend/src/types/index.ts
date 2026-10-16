@@ -261,3 +261,40 @@ export interface ActorDetails {
   appearances: { document_id: string; filename: string; doc_type: string | null; name_as_written: string; role: string | null; page: number | null }[]
   flags: FlagOut[]
 }
+
+export type RecurringTier = 'confirmed' | 'strong' | 'possible'
+
+export interface RecurringMember {
+  actor_id: string
+  case_id: string
+  case_number: string
+  case_title: string
+  name: string
+  aliases: string[]
+  role: string | null
+  document_count: number
+  first_date: string | null
+  last_date: string | null
+  watchlist_category: WatchlistCategory | null
+}
+
+export interface RecurringActor {
+  id: string
+  name: string
+  variants: string[]
+  case_count: number
+  tier: RecurringTier
+  has_conflict: boolean
+  roles: string[]
+  first_date: string | null
+  last_date: string | null
+  watchlist_category: WatchlistCategory | null
+  members: RecurringMember[]
+  links: { actor_a_id: string; actor_b_id: string; tier: RecurringTier; score: number }[]
+}
+
+export interface SeparatedPair {
+  id: string
+  a: { case_id: string; case_number: string; name_key: string }
+  b: { case_id: string; case_number: string; name_key: string }
+}
