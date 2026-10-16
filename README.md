@@ -22,7 +22,7 @@ The name comes from the East Asian legend of the red thread of fate: an invisibl
 
 ## Who we are
 
-The Red Thread is built by **Alderson OSINT Group LLC**. We have spent more than twenty years in cybersecurity and open-source intelligence: following paper trails, connecting people to records, and finding what was meant to stay hidden. Development was assisted by Eve, our in-house assistant.
+The Red Thread is built by **Alderson OSINT Group LLC**. We have spent more than twenty years in cybersecurity and open-source intelligence: following paper trails, connecting people to records, and finding what was meant to stay hidden.
 
 This tool is personal to us. It began with the case of someone close to us, and with the experience of sitting in front of a pile of photocopied decrees, receipts and certificates, knowing the answers were somewhere in those pages. Every one of those pages stands for a family that was separated, and many of them were never told the truth.
 
